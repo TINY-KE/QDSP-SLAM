@@ -1,0 +1,126 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# Camera Parameters. Adjust them!
+#--------------------------------------------------------------------------------------------
+
+# Camera calibration and distortion parameters (OpenCV)
+Camera.fx: 554.254691191187
+Camera.fy: 554.254691191187
+Camera.cx: 320.5
+Camera.cy: 240.5
+
+Camera.kinectdk: 0
+Camera.k1: 0.0
+Camera.k2: 0.0
+Camera.p1: 0.0
+Camera.p2: 0.0
+
+
+# Camera frames per second
+Camera.fps: 30.0
+
+# IR projector baseline times fx (aprox.)
+Camera.bf: 40.0
+
+#--------------------------------------------------------------------------------------------
+# ORB Parameters
+#--------------------------------------------------------------------------------------------
+
+# ORB Extractor: Number of features per image
+ORBextractor.nFeatures: 1000
+
+# ORB Extractor: Scale factor between levels in the scale pyramid
+ORBextractor.scaleFactor: 1.2
+
+# ORB Extractor: Number of levels in the scale pyramid
+ORBextractor.nLevels: 8
+
+# ORB Extractor: Fast threshold
+# Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
+# Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
+# You can lower these values if your images have low contrast
+ORBextractor.iniThFAST: 20  #从20改成12后 就能运行了， 这是为什么？
+ORBextractor.minThFAST: 7
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#--------------------------------------------------------------------------------------------
+Viewer.KeyFrameSize: 0.1  # originally 0.6
+Viewer.KeyFrameLineWidth: 2
+Viewer.GraphLineWidth: 4
+Viewer.PointSize: 2
+Viewer.CameraSize: 0.15  # originally 0.7
+Viewer.CameraLineWidth: 3
+Viewer.ViewpointX: 0
+Viewer.ViewpointY: -10   # originally -10
+Viewer.ViewpointZ: -0.1
+Viewer.ViewpointF: 2000
+Viewer.UsePangolin: 1
+
+# dsp
+YoloClasses: [56, 57, 60, 59, 62]
+DecoderPaths: ["weights/deepsdf/chairs_64",
+               "weights/deepsdf/sofas_64",
+               "weights/deepsdf/tables_64",  #table is default object in my code, so it's essential to keep the table.
+               "weights/deepsdf/beds_64",
+               "weights/deepsdf/books_64_c"]
+
+# ros
+use_ros: 1
+DatasetPathRoot: "/home/robotlab/ws_3d_vp/src/QSP-SLAM-my/data/MySimDataset/GroundObjects"
+Minimux_Points_To_Judge_Good: 20  #视情况，看是否要减小到5
+
+# camera
+Camera.width: 640
+Camera.height: 480
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
+Camera.RGB: 1
+
+# Close/Far threshold. Baseline times.
+ThDepth: 40.0
+
+# Deptmap values factor
+DepthMapFactor: 1
+
+#物体检测
+# Config path for Python detectors
+DetectorConfigPath: configs/config_self_allobject_ground.json
+Objects.maskErrosion: 5  #default 10
+
+# 保存本地
+saveobjects: 1
+savepoints: 1
+savePCDMap: 0
+
+# chair转counch(沙发)
+chair2counch: 0
+
+# use_object
+useObjectConstruct: 1    
+ComputeCuboidType: 1
+# + 修改物体识别的物体种类
+# /home/robotlab/ws_3d_vp/src/QSP-SLAM-my/reconstruct/contents.py
+
+# 最小融合距离
+min_merge_dis: 1    
+
+
+# 地面
+ConstraintType: 1 #3 rostf; 2 imu; 1 yaml
+
+
+
+
+#  rosrun tf tf_echo /world /camera_rgb_optical_frame
+
+# - Translation: [0.093, -0.012, 1.324]
+# - Rotation: in Quaternion [0.542, -0.540, 0.455, -0.456]
+# 俯视角度 10度左右
+Tworld_camera.tx: 0.093
+Tworld_camera.ty: -0.012
+Tworld_camera.tz: 1.324
+Tworld_camera.qw:  -0.456
+Tworld_camera.qx: 0.542
+Tworld_camera.qy: -0.540
+Tworld_camera.qz:  0.455

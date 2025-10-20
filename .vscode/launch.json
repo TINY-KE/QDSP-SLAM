@@ -1,0 +1,89 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "C++ Launch",
+        "type": "cppdbg",
+        "request": "launch",
+        // "program": "${workspaceFolder}/dsp_slam_mono",
+        "program": "${workspaceFolder}/dsp_slam_rgbd",
+        // "program": "${workspaceFolder}/label_tool",
+        // "program": "${workspaceFolder}/instanceAnnotation",
+        "args": [
+          "Vocabulary/ORBvoc.bin",
+          "configs/ruihai.yaml",
+          "/home/robotlab/dataset/Ruihan",
+          "/home/robotlab/dataset/Ruihan/associations.txt",
+          "map/self/GroundObjects"
+
+
+          // "Vocabulary/ORBvoc.bin",
+          // "configs/self_allobject_ground.yaml",
+          // "/home/robotlab/dataset/MySimDataset/GroundObjects",
+          // "/home/robotlab/dataset/MySimDataset/GroundObjects/associations.txt",
+          // "map/self/GroundObjects"
+
+          // "Vocabulary/ORBvoc.bin",
+          // "configs/replica_room1.yaml",
+          // "/home/robotlab/dataset/Replica_room1",
+          // "/home/robotlab/dataset/Replica_room1/associations.txt",
+          // "map/self/GroundObjects"
+          
+          // "Vocabulary/ORBvoc.bin",
+          // "configs/ICL_NUIM_home_2.yaml",
+          // "/home/robotlab/dataset/ICL-NUIM/living_room_traj2n_frei_png",
+          // "/home/robotlab/dataset/ICL-NUIM/living_room_traj2n_frei_png/associations.txt",
+          // "map/self/GroundObjects"
+            
+          // "Vocabulary/ORBvoc.bin",
+          // "configs/self_allobject_ground.yaml",
+          // "/media/robotlab/新加卷/ubuntu22/QSP-SLAM-all/MySimDataset/GroundObjects",
+          // "/media/robotlab/新加卷/ubuntu22/QSP-SLAM-all/MySimDataset/GroundObjects/associate.txt",
+          // "map/self/GroundObjects"
+
+
+
+
+            // "Vocabulary/ORBvoc.bin",
+            // "configs/tum_fr1_desk.yaml",
+            // "/media/lj/TOSHIBA/dataset/TUM/fr1_desk/rgbd_dataset_freiburg1_desk",
+            // "configs/associations/fr1_desk.txt",
+            // "map/tum/fr1_desk"
+
+            // "Vocabulary/ORBvoc.bin",
+            // "configs/redwood_chair_01053.yaml",
+            // "/media/lj/TOSHIBA/dataset/RedwoodOS/data/rgbd/01053",
+            // "/media/lj/TOSHIBA/dataset/RedwoodOS/data/rgbd/01053/associate.txt",
+            // "map/redwood/01053"
+
+            // "Vocabulary/ORBvoc.bin",
+            // "configs/redwood_monitor_01041.yaml",
+            // "/media/lj/TOSHIBA/dataset/RedwoodOS/data/rgbd/01041",
+            // "/media/lj/TOSHIBA/dataset/RedwoodOS/data/rgbd/01041/associate.txt",
+            // "map/redwood/01041"
+
+            // "Vocabulary/ORBvoc.bin",
+            // // "configs/tum_fr2_dishes.yaml",
+            // "configs/redwood_chair_01053.yaml",
+            // "/home/lj/Documents/dataset/TUM/rgbd_dataset_freiburg2_dishes",
+            // "/home/lj/Documents/dataset/TUM/rgbd_dataset_freiburg2_dishes/associate.txt",
+            // "map/tum/fr2_dishes"
+
+
+            // "Vocabulary/ORBvoc.bin",
+            // "configs/self_allobject_circle.yaml",
+            // "/media/lj/TOSHIBA/dataset/FromZHJD/circle",
+            // "/media/lj/TOSHIBA/dataset/FromZHJD/circle/associate.txt",
+            // "map/self/circle"
+
+            
+
+        ],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb"
+      }
+    ]
+}

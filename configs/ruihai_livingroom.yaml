@@ -1,0 +1,217 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# Camera Parameters. Adjust them!
+#--------------------------------------------------------------------------------------------
+
+# Camera calibration and distortion parameters (OpenCV)
+Camera.fx: 614.918291 
+Camera.fy: 617.128471
+Camera.cx: 635.265398
+Camera.cy: 377.167164
+
+Camera.k1: 0.08169331111351927
+Camera.k2: -0.046195201015812426
+Camera.p1: 0.0012333372743673005
+Camera.p2: -0.0006100655327036554
+
+# Camera frames per second
+Camera.fps: 25.0
+Camera.bf: 40.0  # IR projector baseline times fx (aprox.)
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
+Camera.RGB: 1
+
+# Config path for Python detectors
+DetectorConfigPath: configs/config_ruihai_livingroom.json
+Objects.maskErrosion: 15
+
+#--------------------------------------------------------------------------------------------
+# ORB Parameters
+#--------------------------------------------------------------------------------------------
+
+# ORB Extractor: Number of features per image
+ORBextractor.nFeatures: 4000
+
+# ORB Extractor: Scale factor between levels in the scale pyramid
+ORBextractor.scaleFactor: 1.2
+
+# ORB Extractor: Number of levels in the scale pyramid
+ORBextractor.nLevels: 8
+
+# ORB Extractor: Fast threshold
+# Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
+# Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
+# You can lower these values if your images have low contrast
+ORBextractor.iniThFAST: 20
+ORBextractor.minThFAST: 7
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#--------------------------------------------------------------------------------------------
+Viewer.KeyFrameSize: 0.1  # originally 0.6
+Viewer.KeyFrameLineWidth: 2
+Viewer.GraphLineWidth: 4
+Viewer.PointSize: 2
+Viewer.CameraSize: 0.15  # originally 0.7
+Viewer.CameraLineWidth:  6
+Viewer.ViewpointX: 0
+Viewer.ViewpointY: -10   # originally -10
+Viewer.ViewpointZ: -0.1
+Viewer.ViewpointF: 2000
+Viewer.UsePangolin: 1
+
+
+#--------------------------------------------------------------------------------------------
+# EDSP
+#--------------------------------------------------------------------------------------------
+
+YoloClasses: [56, 57, 2, 75, 60, 59, 62, 63, 73]
+DecoderPaths: ["weights/deepsdf/chairs_64",
+               "weights/deepsdf/sofas_64",
+               "weights/deepsdf/cars_64",
+               "weights/deepsdf/vases_64_c",
+               "weights/deepsdf/tables_64",  #table is default object in my code, so it's essential to keep the table.
+               "weights/deepsdf/beds_64",
+               "weights/deepsdf/displays_64",
+               "weights/deepsdf/laptops_64",
+               "weights/deepsdf/books_64_c"]
+
+# ros
+use_ros: 0   # 1：读取存贮在本地的ros.png   0：根据association.txt读取图片
+DatasetPathRoot: "./build/"
+# Dataset.Path.Map: "/home/robotlab/dataset/ICL-NUIM/living_room_traj2n_frei_png/dataset.pcd"
+Dataset.Path.Map: "/home/robotlab/dataset/Ruihan/mylivingroom/map/remove_one_wall.pcd"
+Dataset.global_map_input: 0
+Dataset.Filter.DisThresh: 1.8
+Dataset.step: 1
+Dataset.sleep_time: 0.3   #TODO:
+Dataset.Type: "AllObjectsOnGround"
+Minimux_Points_To_Judge_Good: 5  #20  #视情况，看是否要减小到5
+
+# camera
+Camera.width: 1280
+Camera.height: 720
+
+# Close/Far threshold. Baseline times.
+ThDepth: 40.0
+
+# Deptmap values factor  
+DepthMapFactor: 5000  #对应
+
+# 保存本地
+saveobjects: 1
+savepoints: 0
+savePCDMap: 0
+
+# chair转counch(沙发)
+chair2counch: 0
+
+# ------------------------------------
+#  单帧椭球体估计： Single-frame ellipsoid estimation
+# ------------------------------------
+# Pointcloud segmentation parameters
+EllipsoidExtraction.ClusterTolerance: 0.15  #控制聚类半径（单位：米），越小：只聚类彼此非常靠近的点，越大：可能会聚成大簇，甚至将多个物体合并
+EllipsoidExtraction.MinClusterSize: 5
+EllipsoidExtraction.CenterDis: 0.5
+EllipsoidExtraction.MinEllipsoidSize: 0.05
+
+EllipsoidExtraction.ManhattanPlanesFilter.Open: 1
+EllipsoidExtractor.Rotation.NormalVoter.KSearchNum: 35
+EllipsoidExtractor.MinNeighborsInRadius: 40
+EllipsoidExtractor.StatisticalOutlierRemoval.MeanK: 50
+EllipsoidExtractor.Optimizer.Number: 15
+EllipsoidExtractor.Optimizer.SupportingWeight: 1.0
+EllipsoidExtractor.Optimizer.BackingWeight:  1.0
+EllipsoidExtractor.Optimizer.BboxWeight:  1.2
+EllipsoidExtractor.Optimizer.PlaneNormalAngle: 100
+EllipsoidExtractor.RefineEllipsoid.Border.x2.Pixels: 0
+EllipsoidExtractor.RefineEllipsoid.Border.y2.Pixels: 0
+EllipsoidExtractor.EuclideanFilter.Open: 1
+EllipsoidExtractor.SupportingPlaneFilter.DisThresh: 0.03
+EllipsoidExtractor.backing_distance_max: 0.2
+
+
+
+
+EllipsoidExtractor_DEPTH_RANGE: 7
+EllipsoidExtractor_Radius_Search: 0.2
+EllipsoidExtractor_MinNeighborsInRadius: 10
+Ellipsoid.VisualzeDepthPoints: 1
+
+
+# 地平面提取参数： Ground Plane Extraction
+Plane.MinSize: 100  #1000
+Plane.AngleThreshold: 3.0
+Plane.DistanceThreshold: 0.05
+Plane.MH_points_in_plane_size_scale: 0.25
+
+
+# 椭球体数据关联
+Tracking.AssociateObjectWithEllipsold: 1
+Tracking.AssociateDebug: 0
+Tracking.AssociateIoUThresold: 0.42
+Tracking.AssociateDisThresold: 0.5
+Tracking.Associate.ManualLabel.x:     [-0.470196  ]  
+Tracking.Associate.ManualLabel.y:     [-0.074264 ]
+Tracking.Associate.ManualLabel.z:     [0.287364]
+Tracking.Associate.ManualLabel.label: [57]  # 60: table, 56: chair, 57: couch
+Tracking.Associate.ManualDirection:   [1]   # 0：不限制，1：x正， 2：y正， 3：x负， 4：y负
+Tracking.Associate.ManualLabel.DisThresold: 0.8
+
+
+# Debug的控制变量
+Debug.EllipsoidExtraction.DetectSource: 2  # 1：bbox过滤点云，2：掩码过滤点云
+Debug.EllipsoidExtraction.OpenRelations: 0  # 在单帧EllipsoidExtraction中就通过曼哈顿平面优化，而不是等到数据关联后
+Debug.Tracking.ellipsoid_extract: 1      # 提取椭球体
+Debug.Tracking.ellipsoid_associate: 1   # 数据关联
+Debug.Tracking.recompute_merged_ellipsoid: 1  # 数据关联并融合后，重新计算椭球体
+Debug.LocalMapping.ObjectInit: 1    # 将新物体（数据关联失败的物体）生成为新Global物体
+Debug.LocalMapping.SDFConstruct: 1  # DeepSDF
+
+
+# Bounding box filter
+Measurement.Border.Pixels: 10
+Measurement.LengthLimit.Pixels: 0
+Measurement.Probability.Thresh: 0
+
+# 物体建模
+Mapping.use_depth_pcd_to_reconstruct: 1  # 1 PCL Cloud, 0 ORB Points, 2 Close Reconstruction
+Mapping.LocalMappingInSameThread: 1
+Mapping.PcdCloudVoxelType: 1  #0 不降采样， 1 均匀， 2 近似
+Mapping.PcdCloudVoxelSize: 0.03
+Mapping.MinValidPoints: 50
+Mapping.MinValidRays: 0
+Mapping.ObjectScale: 1.0
+Mapping.use_ellipsoid_verticles: 1
+Mapping.ellipsoid_verticles_scale: 0.05
+Mapping.ellipsoid_verticles_degree: 18
+
+# use_object
+useObjectConstruct: 1
+ComputeCuboidType: 3    #3：椭球体
+NumKFsPassedSinceInit_thresh: 1  #一个物体被检测的次数，大于该值，才进行一次重建，从而节约运算资源
+NumKFsPassedSinceLastRecon_thresh: 4  #自上次重建后经过的最少关键帧数量，如果小于阈值，则跳过重建，从而节约运算资源
+# + 修改物体识别的物体种类
+# /home/robotlab/ws_3d_vp/src/QSP-SLAM-my/reconstruct/contents.py
+
+
+# 地面
+ConstraintType: 1 #3 rostf; 2 imu; 1 yaml
+
+# Visualization
+Visualization.Builder.Open: 1
+Visualization.Builder.Global.Open: 1
+Visualization.Builder.VoxelSize: 0.05
+
+# #  相机俯视20度   对应gazebo相机移动参数3.5 1 20.0  1
+# # https://www.andre-gaschler.com/rotationconverter/
+# # Euler angles (degrees) ZYX   [ x: -90.00, y: 0, z: -90 ]
+# # Quaternion [x, y, z, w]  [ -0.5, 0.5, -0.5, 0.5 ]
+Tworld_camera.qx: -0.5
+Tworld_camera.qy: 0.5
+Tworld_camera.qz: -0.5
+Tworld_camera.qw: 0.5
+Tworld_camera.tx: 0.0
+Tworld_camera.ty: 0.0
+# Tworld_camera.tz: 0.75  # bedroom
+Tworld_camera.tz: 0.44  # livingroom
