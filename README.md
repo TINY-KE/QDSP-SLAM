@@ -1,4 +1,7 @@
-# This repository contains the open-source implementation of the paper  **"QDSP-SLAM: Indoor Object Oriented SLAM Coupling Dual Quadrics and Deep Shape Priors."**  
+
+## Open-source implementation of the paper  **"QDSP-SLAM: Indoor Object Oriented SLAM Coupling Dual Quadrics and Deep Shape Priors."**  
+
+## Comprehensive usage instructions are currently being prepared and will be made available soon.
 
 ![QDSP-SLAM](figures/1.png)
 *Figure 1: QDSP-SLAM.*
@@ -7,5 +10,5 @@
 *Figure 2: Qualitative scene reconstruction results.*
 
 
-Comprehensive usage instructions and documentation are currently being prepared and will be made available soon.
+
 
